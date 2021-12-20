@@ -5,6 +5,8 @@ function _middleware(req: NextRequest) {
 		return NextResponse.rewrite("/404");
 	}
 
+	if (!req.cookies.accessToken) return NextResponse.rewrite("/create");
+
 	NextResponse.next();
 }
 
