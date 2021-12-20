@@ -5,7 +5,6 @@ import AlignCenter from "../../components/AlignCenter";
 import Sections from "../../components/content/Sections";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
-import CharacterInput from "../../components/content/CharacterInput";
 import { useRouter } from "next/router";
 import DonateBall from "../../components/DonateBall";
 
@@ -13,12 +12,12 @@ const Confirm: NextPage = () => {
 	const route = useRouter();
 
 	async function back() {
-		await route.push("/create/phone", "/create");
+		await route.push("/create", "/create");
 	}
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
-		await route.push("/create", "/create");
+		await route.push("/create/complete", "/create");
 	}
 
 	return (
