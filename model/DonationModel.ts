@@ -1,7 +1,7 @@
 import { getRandColor } from "../lib/getRandColor";
 import PrismaModel from "./PrismaModel";
 import { ThemeColor } from "../styles/Theme";
-import { ballPosition } from "../constant/balls";
+import { ballPosition, dummyBallPosition } from "../constant/balls";
 
 class DonationModel extends PrismaModel {
 	constructor() {
@@ -87,6 +87,37 @@ class DonationModel extends PrismaModel {
 					...obj,
 					...ballPosition[index],
 				}))
+		);
+	}
+
+	/**
+	 * 더미용 볼을 추가합니다
+	 *
+	 * @param length - 가져올 아이템의 총 개수입니다.
+	 */
+	async getSmallBalls(length = 9) {
+		return (
+			new Array(length * 2)
+				.fill("")
+				// make object flat
+				.map((_, index) => ({
+					id: `dummy${index}`,
+					name: "dummy",
+					phone: "0000",
+					ballSize: "small" as "small",
+					...dummyBallPosition[index],
+				}))
+				// set color
+				.map((obj) => {
+					const background = getRandColor();
+					const text = background === "white" ? "treeGreen" : "white";
+
+					return {
+						...obj,
+						ballText: text as ThemeColor,
+						ballBackground: background as ThemeColor,
+					};
+				})
 		);
 	}
 
