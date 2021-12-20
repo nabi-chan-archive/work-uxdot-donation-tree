@@ -12,7 +12,7 @@ const Confirm: NextPage = () => {
 	const route = useRouter();
 
 	async function back() {
-		await route.push("/create", "/create");
+		await route.push("/create/name", "/create");
 	}
 
 	async function handleSubmit(event: React.FormEvent) {
