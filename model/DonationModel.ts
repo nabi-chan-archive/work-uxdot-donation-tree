@@ -1,4 +1,7 @@
+import { getRandColor } from "../lib/getRandColor";
 import PrismaModel from "./PrismaModel";
+import { ThemeColor } from "../styles/Theme";
+import { ballPosition } from "../constant/balls";
 
 class DonationModel extends PrismaModel {
 	constructor() {
@@ -31,22 +34,60 @@ class DonationModel extends PrismaModel {
 	async list(take: number, page: number) {
 		const skip = take * page;
 
-		return await this.client.donation.findMany({
-			orderBy: {
-				createdAt: "desc",
-			},
-			include: {
-				session: {
+		return (
+			(
+				await this.client.donation.findMany({
+					orderBy: {
+						createdAt: "desc",
+					},
 					select: {
 						id: true,
-						name: true,
-						phone: true,
+						sessionId: false,
+						createdAt: false,
+						session: {
+							select: {
+								id: false,
+								name: true,
+								phone: true,
+							},
+						},
 					},
-				},
-			},
-			skip,
-			take,
-		});
+					skip,
+					take,
+				})
+			)
+				// make object flat
+				.map(({ id, session }) => ({
+					id,
+					...session,
+				}))
+				// set encrypt user's phone
+				.map(({ phone, ...obj }) => ({
+					...obj,
+					phone: `${phone!.slice(0, 1)}**${phone!.slice(3, 4)}`,
+				}))
+				// set ballSize
+				.map((obj) => ({
+					...obj,
+					ballSize: "big" as "big",
+				}))
+				// set color
+				.map((obj) => {
+					const background = getRandColor();
+					const text = background === "white" ? "treeGreen" : "white";
+
+					return {
+						...obj,
+						ballText: text as ThemeColor,
+						ballBackground: background as ThemeColor,
+					};
+				})
+				// set ball position
+				.map((obj, index) => ({
+					...obj,
+					...ballPosition[index],
+				}))
+		);
 	}
 
 	/**
