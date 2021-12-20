@@ -9,23 +9,21 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
   }
   
   html {
-    font-family: ${({ theme }) => theme.fontFamily};
-    font-weight: 400;
-  
+	  font-family: inherit ${({ theme }) => theme.fontFamily} !important;
+	  font-weight: 400;
+	  
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     width: 100%;
     overflow-x: hidden;
     font-size: calc(10px + 0.7vmin);
     letter-spacing: -0.05ch;
-    font-display: swap;
   }
   
   body {
     width: 100vw;
 	  height: 100vh;
     overflow: hidden;
-    line-height: 1.5;
   }
   
   b {
