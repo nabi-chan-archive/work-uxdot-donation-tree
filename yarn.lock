@@ -605,6 +605,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@types/js-cookie@npm:3.0.1"
+  checksum: 134abb4a3f139ae791bdef3735ab14c4c098cb564b34363cc8f0aa6210a715e5e4f25b53717b32acb18099d53221e4f13776917e65ac54b3a60ee676a943abdc
+  languageName: node
+  linkType: hard
+
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
@@ -3518,6 +3525,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "js-cookie@npm:3.0.1"
+  checksum: bb48de67e2a6bd1ae3dfd6b2d5a167c33dd0c5a37e909206161eb0358c98f17cb55acd55827a58e9eea3630d89444e7479f7938ef4420dda443218b8c434a4c3
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -6060,6 +6074,7 @@ __metadata:
   dependencies:
     "@prisma/client": ^3.6.0
     "@types/color": ^3.0.2
+    "@types/js-cookie": ^3.0.1
     "@types/jsonwebtoken": ^8.5.6
     "@types/node": 17.0.0
     "@types/react": 17.0.37
@@ -6070,6 +6085,7 @@ __metadata:
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
     framer-motion: ^5.5.5
+    js-cookie: ^3.0.1
     jsonwebtoken: ^8.5.1
     next: 12.0.7
     prettier: ^2.5.1
