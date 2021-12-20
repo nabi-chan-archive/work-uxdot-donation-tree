@@ -512,6 +512,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@prisma/client@npm:3.6.0"
+  dependencies:
+    "@prisma/engines-version": 3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: 83835117d60d100cf0933f60933603f5b85833414ad4dae9ea6b18f99190030317de459bbb573e928f764b476733676722fd90637292defae887dd974a2914a1
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727":
+  version: 3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727
+  resolution: "@prisma/engines-version@npm:3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+  checksum: 40adea282d62b7d8d03696f3f9f1c6da271671955f5305d3750d07f80eff7bcfad89430e97215183d027895487c4ab36373fc8f59df1a537eb2ab18458168993
+  languageName: node
+  linkType: hard
+
+"@prisma/engines@npm:3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727":
+  version: 3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727
+  resolution: "@prisma/engines@npm:3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727"
+  checksum: 3eb1e40dbd6ca8e8bd727048393b9fd993b415bcc1efca2f6bac5b0a60da8e73c2dd35602c4083b29fc31fd17a2cc9ba0522afe1b6499a68663ecdf5f833cdb3
+  languageName: node
+  linkType: hard
+
 "@rushstack/eslint-patch@npm:^1.0.8":
   version: 1.1.0
   resolution: "@rushstack/eslint-patch@npm:1.1.0"
@@ -4565,6 +4593,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prisma@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "prisma@npm:3.6.0"
+  dependencies:
+    "@prisma/engines": 3.6.0-24.dc520b92b1ebb2d28dc3161f9f82e875bd35d727
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: 365718b1e0ed8491aedb79bda39c500e8fddae0d62f57ed0ab3786c6709bd79d43b61c3603847b165b5a3de1e983b64388902a9ed55d4d5cb5878d67af23da8b
+  languageName: node
+  linkType: hard
+
 "process-nextick-args@npm:~2.0.0":
   version: 2.0.1
   resolution: "process-nextick-args@npm:2.0.1"
@@ -5896,6 +5936,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "uxdot-donation-tree@workspace:."
   dependencies:
+    "@prisma/client": ^3.6.0
     "@types/color": ^3.0.2
     "@types/node": 17.0.0
     "@types/react": 17.0.37
@@ -5908,6 +5949,7 @@ __metadata:
     framer-motion: ^5.5.5
     next: 12.0.7
     prettier: ^2.5.1
+    prisma: ^3.6.0
     react: 17.0.2
     react-dom: 17.0.2
     react-fast-marquee: ^1.2.1
