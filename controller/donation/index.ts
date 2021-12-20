@@ -31,9 +31,13 @@ class DonationController {
 	 * 지금까지 진행된 기부 목록을 트리에 맞게 9개씩 끊어서 가져옵니다.
 	 */
 	async tree(req: Request, res: Response) {
-		return res
-			.status(200)
-			.json(await this.model.list(9, Number(req.query.page || 0)));
+		const big = await this.model.list(9, Number(req.query.page || 0));
+		const small = await this.model.getSmallBalls(big.length);
+
+		return res.status(200).json({
+			big,
+			small,
+		});
 	}
 
 	/**
