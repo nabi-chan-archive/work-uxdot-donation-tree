@@ -3,6 +3,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import { Light } from "../styles/Theme";
+import MarqueeBanner from "../components/MarqueeBanner";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -10,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Reset />
 			<ThemeProvider theme={Light}>
 				<GlobalStyle />
+				<MarqueeBanner />
 				<Component {...pageProps} />
 			</ThemeProvider>
 		</>
