@@ -5698,6 +5698,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"swr@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "swr@npm:1.1.1"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: 6ac1af4f7ad512c6de4dda2be4f18efe95f338dd2d0235c7de70e8c44df15c27a42ced48f2668dd2c3f6466d10eb51f3d8c21748d0f16a9a50683f6fa1db426d
+  languageName: node
+  linkType: hard
+
 "tar-fs@npm:^2.0.0, tar-fs@npm:^2.1.1":
   version: 2.1.1
   resolution: "tar-fs@npm:2.1.1"
@@ -6096,6 +6105,7 @@ __metadata:
     sharp: ^0.29.3
     styled-components: ^5.3.3
     styled-reset: ^4.3.4
+    swr: ^1.1.1
     typescript: 4.5.4
     vercel: ^23.1.2
   languageName: unknown

@@ -3,6 +3,7 @@ import GlobalStyle from "../styles/GlobalStyle";
 import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import { Light } from "../styles/Theme";
+import { SWRConfig } from "swr";
 import MarqueeBanner from "../components/MarqueeBanner";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -11,8 +12,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Reset />
 			<ThemeProvider theme={Light}>
 				<GlobalStyle />
-				<MarqueeBanner />
-				<Component {...pageProps} />
+				<SWRConfig
+					value={{
+						fetcher: (resource, init) =>
+							fetch(resource, init).then((res) => res.json()),
+					}}>
+					<MarqueeBanner />
+					<Component {...pageProps} />
+				</SWRConfig>
 			</ThemeProvider>
 		</>
 	);

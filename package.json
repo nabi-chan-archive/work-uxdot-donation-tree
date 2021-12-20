@@ -20,7 +20,8 @@
     "react-fast-marquee": "^1.2.1",
     "sharp": "^0.29.3",
     "styled-components": "^5.3.3",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "swr": "^1.1.1"
   },
   "devDependencies": {
     "@types/color": "^3.0.2",
