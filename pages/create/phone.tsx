@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Background from "../../components/Background";
 import Grid from "../../layout/grid";
 import AlignCenter from "../../components/AlignCenter";
@@ -7,16 +7,30 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import { useRouter } from "next/router";
 import Input from "../../components/Input";
+import SessionModel from "../../model/SessionModel";
+import jsonwebtoken from "jsonwebtoken";
+import { FormElement } from "../../type";
+import axios from "axios";
 
-const Phone: NextPage = () => {
+interface Props {
+	userInfo: {
+		name: string;
+		phone: string;
+	};
+}
+
+const Phone: NextPage<Props> = ({ userInfo }) => {
 	const route = useRouter();
 
 	async function back() {
 		await route.push("/create/name", "/create");
 	}
 
-	async function handleSubmit(event: React.FormEvent) {
+	async function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
+		await axios.put("/api/session", {
+			phone: event.currentTarget.elements.phone.value,
+		});
 		await route.push("/create/confirm", "/create");
 	}
 
@@ -59,12 +73,28 @@ const Phone: NextPage = () => {
 							placeholder={"전화번호 끝 4자리"}
 							name={"phone"}
 							key={"phone"}
+							defaultValue={userInfo.phone}
 						/>
 					</AlignCenter>
 				</Background>
 			</Grid>
 		</Form>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+	const model = new SessionModel();
+	const { uuid } = jsonwebtoken.decode(req.cookies.accessToken!) as {
+		uuid: string;
+	};
+
+	const userInfo = await model.read(uuid);
+
+	return {
+		props: {
+			userInfo,
+		},
+	};
 };
 
 export default Phone;

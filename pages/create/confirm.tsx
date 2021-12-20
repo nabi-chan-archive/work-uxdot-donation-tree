@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Background from "../../components/Background";
 import Grid from "../../layout/grid";
 import AlignCenter from "../../components/AlignCenter";
@@ -7,8 +7,17 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import { useRouter } from "next/router";
 import DonateBall from "../../components/DonateBall";
+import SessionModel from "../../model/SessionModel";
+import jsonwebtoken from "jsonwebtoken";
 
-const Confirm: NextPage = () => {
+interface Props {
+	userInfo: {
+		name: string;
+		phone: string;
+	};
+}
+
+const Confirm: NextPage<Props> = ({ userInfo }) => {
 	const route = useRouter();
 
 	async function back() {
@@ -56,14 +65,29 @@ const Confirm: NextPage = () => {
 							ballBackground={"white"}
 							ballText={"treeGreen"}
 							ballSize={"preview"}
-							name={"권성배"}
-							phone={"4**5"}
+							name={userInfo.name}
+							phone={userInfo.phone}
 						/>
 					</AlignCenter>
 				</Background>
 			</Grid>
 		</Form>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+	const model = new SessionModel();
+	const { uuid } = jsonwebtoken.decode(req.cookies.accessToken!) as {
+		uuid: string;
+	};
+
+	const userInfo = await model.read(uuid);
+
+	return {
+		props: {
+			userInfo,
+		},
+	};
 };
 
 export default Confirm;

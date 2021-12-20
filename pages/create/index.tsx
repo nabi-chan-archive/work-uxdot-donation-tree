@@ -7,12 +7,15 @@ import Button from "../../components/Button";
 import Form from "../../components/Form";
 import CharacterInput from "../../components/content/CharacterInput";
 import { useRouter } from "next/router";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Create: NextPage = () => {
 	const route = useRouter();
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
+		Cookies.set("accessToken", (await axios.post("/api/session")).data.token);
 		await route.push("/create/name", "/create");
 	}
 
