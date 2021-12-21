@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { Light } from "../styles/Theme";
 import { SWRConfig } from "swr";
 import MarqueeBanner from "../components/content/MarqueeBanner";
+import ToastContextProvider from "../context/toast.context";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -17,8 +18,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 						fetcher: (resource, init) =>
 							fetch(resource, init).then((res) => res.json()),
 					}}>
-					<MarqueeBanner />
-					<Component {...pageProps} />
+					<ToastContextProvider>
+						<MarqueeBanner />
+						<Component {...pageProps} />
+					</ToastContextProvider>
 				</SWRConfig>
 			</ThemeProvider>
 		</>
