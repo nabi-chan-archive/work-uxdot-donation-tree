@@ -14,6 +14,7 @@ import Tree, { Ball } from "../../components/content/Tree";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { AnimatePresence } from "framer-motion";
 
 const PageButton = styled.button<{
 	left?: number;
@@ -56,11 +57,13 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 	const maxPage = Math.ceil(meta._count / 9);
 	const [treeData, setTreeData] = useState<Props["tree"]>(tree);
 	const [page, setPage] = useState(0);
+	const [visible, setVisible] = useState(true);
 
 	async function onChangePage(target: "next" | "prev") {
 		if (target === "next") setPage((prev) => prev + 1);
 		if (target === "prev") setPage((prev) => prev - 1);
 
+		setVisible(false);
 		setTreeData(
 			(
 				await axios.get("http://localhost:3000/api/donation/tree", {
@@ -163,13 +166,15 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 						</PageButton>
 					) : null}
 					<AlignCenter justify>
-						{Array(maxPage)
-							.fill("")
-							.map((_, index) => {
-								return index === page ? (
-									<Tree key={index} balls={treeData} />
-								) : null;
-							})}
+						<AnimatePresence onExitComplete={() => setVisible(true)}>
+							{Array(maxPage)
+								.fill("")
+								.map((_, index) => {
+									return index === page && visible ? (
+										<Tree key={index} balls={treeData} />
+									) : null;
+								})}
+						</AnimatePresence>
 					</AlignCenter>
 					{page < maxPage - 1 ? (
 						<PageButton right={85} onClick={() => onChangePage("next")}>
