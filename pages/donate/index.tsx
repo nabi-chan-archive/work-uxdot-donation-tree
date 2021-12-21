@@ -129,6 +129,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 				<div
 					style={{
 						display: "grid",
+						gridTemplateRows: "1fr 40px",
 						position: "relative",
 						height: "100%",
 					}}>
