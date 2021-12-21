@@ -23,16 +23,12 @@ export type Ball = React.ComponentProps<typeof DonateBall> & {
 };
 
 interface Props {
-	dummy: Ball[];
 	balls: Ball[];
 }
 
-const Tree: React.FC<Props> = ({ dummy, balls }) => {
+const Tree: React.FC<Props> = ({ balls }) => {
 	return (
 		<TreeContainer>
-			{dummy.map((ball) => (
-				<AbsoluteDonateBall key={ball.id} {...ball} />
-			))}
 			{balls.map((ball) => (
 				<AbsoluteDonateBall key={ball.id} {...ball} />
 			))}

@@ -34,10 +34,9 @@ class DonationController {
 		const big = await this.model.list(9, Number(req.query.page || 0));
 		const small = await this.model.getSmallBalls(big.length);
 
-		return res.status(200).json({
-			big,
-			small,
-		});
+		return res
+			.status(200)
+			.json([...big, ...small].sort((p, c) => (p.top > c.top ? 1 : -1)));
 	}
 
 	/**

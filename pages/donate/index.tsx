@@ -44,10 +44,7 @@ interface Props {
 	meta: {
 		_count: number;
 	};
-	tree: {
-		big: Ball[];
-		small: Ball[];
-	};
+	tree: Ball[];
 	info: {
 		id: number;
 		name: string;
@@ -170,11 +167,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 							.fill("")
 							.map((_, index) => {
 								return index === page ? (
-									<Tree
-										key={index}
-										dummy={treeData.small}
-										balls={treeData.big}
-									/>
+									<Tree key={index} balls={treeData} />
 								) : null;
 							})}
 					</AlignCenter>
