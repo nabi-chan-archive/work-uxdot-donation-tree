@@ -36,6 +36,7 @@ const PageButton = styled.button<{
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	border-radius: 50%;
+	z-index: 10;
 
 	&:hover {
 		background: ${({ theme }) => theme.white.toString()};
