@@ -1,5 +1,5 @@
 import { ThemeColor } from "../styles/Theme";
-import DonateBall from "../components/DonateBall";
+import DonateBall from "../components/content/DonateBall";
 
 type BallType = React.ComponentProps<typeof DonateBall> & {
 	id: string;

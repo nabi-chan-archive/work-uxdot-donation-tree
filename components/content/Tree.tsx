@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import DonateBall from "../DonateBall";
+import DonateBall from "./DonateBall";
 import StaggerChildren from "../../animation/StaggerChildren";
 import { motion } from "framer-motion";
 

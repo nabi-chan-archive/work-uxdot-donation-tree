@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ThemeColor } from "../styles/Theme";
+import { ThemeColor } from "../../styles/Theme";
 
 interface Props {
 	ballBackground: ThemeColor;

@@ -6,7 +6,7 @@ import Sections from "../../components/content/Sections";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
 import { useRouter } from "next/router";
-import DonateBall from "../../components/DonateBall";
+import DonateBall from "../../components/content/DonateBall";
 import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
 import { requester } from "../../lib/requster";

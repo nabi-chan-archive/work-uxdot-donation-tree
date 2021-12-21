@@ -4,7 +4,7 @@ import { Reset } from "styled-reset";
 import { ThemeProvider } from "styled-components";
 import { Light } from "../styles/Theme";
 import { SWRConfig } from "swr";
-import MarqueeBanner from "../components/MarqueeBanner";
+import MarqueeBanner from "../components/content/MarqueeBanner";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
