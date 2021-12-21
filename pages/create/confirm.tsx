@@ -68,7 +68,10 @@ const Confirm: NextPage<Props> = ({ userInfo }) => {
 							ballText={"treeGreen"}
 							ballSize={"preview"}
 							name={userInfo.name}
-							phone={userInfo.phone}
+							phone={`${userInfo.phone.slice(0, 1)}**${userInfo.phone.slice(
+								3,
+								4,
+							)}`}
 						/>
 					</AlignCenter>
 				</Background>
