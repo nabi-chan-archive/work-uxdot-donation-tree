@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -6,25 +5,14 @@ interface Props {
 	right?: number | string;
 	top?: number | string;
 	bottom?: number | string;
-	children: ReactNode;
 }
 
-const AbsoluteContainer = styled.div`
+const Absolute = styled.div<Props>`
 	position: absolute;
+	top: ${({ top }) => top};
+	left: ${({ left }) => left};
+	right: ${({ right }) => right};
+	bottom: ${({ bottom }) => bottom};
 `;
-
-const Absolute: React.FC<Props> = ({ top, left, right, bottom, children }) => {
-	return (
-		<AbsoluteContainer
-			style={{
-				top,
-				left,
-				right,
-				bottom,
-			}}>
-			{children}
-		</AbsoluteContainer>
-	);
-};
 
 export default Absolute;
