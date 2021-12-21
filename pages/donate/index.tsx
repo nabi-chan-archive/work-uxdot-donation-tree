@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Background from "../../components/Background";
 import Button from "../../components/Button";
 import SpaceBetween from "../../components/content/SpaceBetween";
@@ -14,6 +14,7 @@ import Tree from "../../components/content/Tree";
 import { useState } from "react";
 import styled from "styled-components";
 import { getBallsMockup, getDummyBallsMockup } from "../../constant/dummy";
+import axios from "axios";
 
 const PageButton = styled.button<{
 	left?: number;
@@ -40,7 +41,23 @@ const PageButton = styled.button<{
 	}
 `;
 
-const Donate: NextPage = () => {
+interface Props {
+	meta: {
+		_count: number;
+	};
+	tree: {
+		big: {}[];
+		small: {}[];
+	};
+	info: {
+		id: number;
+		name: string;
+		phone: string;
+	}[];
+}
+
+const Donate: NextPage<Props> = ({ meta, tree, info }) => {
+	console.log(meta, tree, info);
 	const maxPage = 20;
 	const [page, setPage] = useState(0);
 
@@ -54,7 +71,7 @@ const Donate: NextPage = () => {
 				<Background background={"treeRed"} textColor={"white"}>
 					<SpaceBetween background={"treeOrange"} text={"white"}>
 						<dt>누적 기부금액</dt>
-						<dd>540,000원</dd>
+						<dd>{(meta._count * 1000).toLocaleString()}원</dd>
 					</SpaceBetween>
 					<AlignCenter
 						justify
@@ -62,7 +79,10 @@ const Donate: NextPage = () => {
 							height: "calc(100% - 39px)",
 						}}>
 						<div>
-							<DonateTemperature current={150000} target={1000000} />
+							<DonateTemperature
+								current={meta._count * 1000}
+								target={1000000}
+							/>
 							<Space h={35} />
 							<Button background={"white"} color={"treeRed"}>
 								기부하러 가기
@@ -75,29 +95,19 @@ const Donate: NextPage = () => {
 						<dt>함께해주신 분들</dt>
 						<dd>
 							<Text color={"treeGreen"} weight={700}>
-								총 180명
+								총 {meta._count}명
 							</Text>
 						</dd>
 					</SpaceBetween>
 
-					<SpaceBetween background={"white"} text={"black"}>
-						<dt>권성배 님</dt>
-						<dd>
-							<Text color={"treeGrey"}>5**9</Text>
-						</dd>
-					</SpaceBetween>
-					<SpaceBetween background={"white"} text={"black"}>
-						<dt>엄준식 님</dt>
-						<dd>
-							<Text color={"treeGrey"}>5**9</Text>
-						</dd>
-					</SpaceBetween>
-					<SpaceBetween background={"white"} text={"black"}>
-						<dt>한지성 님</dt>
-						<dd>
-							<Text color={"treeGrey"}>5**9</Text>
-						</dd>
-					</SpaceBetween>
+					{info.map((info) => (
+						<SpaceBetween key={info.id} background={"white"} text={"black"}>
+							<dt>{info.name} 님</dt>
+							<dd>
+								<Text color={"treeGrey"}>{info.phone}</Text>
+							</dd>
+						</SpaceBetween>
+					))}
 				</Background>
 			</div>
 
@@ -199,6 +209,22 @@ const Donate: NextPage = () => {
 			</Background>
 		</Grid>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const meta = (await axios.get("http://localhost:3000/api/donation/metadata"))
+		.data;
+	const tree = (await axios.get("http://localhost:3000/api/donation/tree"))
+		.data;
+	const info = (await axios.get("http://localhost:3000/api/donation")).data;
+
+	return {
+		props: {
+			meta,
+			tree,
+			info,
+		},
+	};
 };
 
 export default Donate;
