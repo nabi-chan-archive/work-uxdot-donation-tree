@@ -9,22 +9,11 @@ interface Props {
 	children: ReactNode;
 }
 
-const BackgroundContainer = styled.div`
+const Background = styled.div<Props>`
 	width: 100%;
 	height: 100%;
+	background-color: ${({ theme, background }) => theme[background].toString()};
+	color: ${({ theme, textColor }) => theme[textColor].toString()};
 `;
-
-const Background: React.FC<Props> = ({ background, textColor, children }) => {
-	const theme = useTheme() as Theme;
-	return (
-		<BackgroundContainer
-			style={{
-				background: theme[background].toString(),
-				color: theme[textColor].toString(),
-			}}>
-			{children}
-		</BackgroundContainer>
-	);
-};
 
 export default Background;
