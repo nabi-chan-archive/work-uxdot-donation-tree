@@ -56,7 +56,7 @@ interface Props {
 }
 
 const Donate: NextPage<Props> = ({ meta, tree, info }) => {
-	const maxPage = Math.ceil(meta._count / 9);
+	const maxPage = Math.floor(meta._count / 9);
 	const [treeData, setTreeData] = useState<Props["tree"]>(tree);
 	const [page, setPage] = useState(0);
 	const [visible, setVisible] = useState(true);
@@ -70,7 +70,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 			(
 				await requester.get("/api/donation/tree", {
 					params: {
-						page: page + (target === "next" ? 1 : -1),
+						page: maxPage - (page + (target === "next" ? 1 : -1)),
 					},
 				})
 			).data,
@@ -235,7 +235,14 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const meta = (await requester.get("/api/donation/metadata")).data;
-	const tree = (await requester.get("/api/donation/tree")).data;
+	const lastPage = Math.floor(meta._count / 9);
+	const tree = (
+		await requester.get("/api/donation/tree", {
+			params: {
+				page: lastPage,
+			},
+		})
+	).data;
 	const info = (await requester.get("/api/donation")).data;
 
 	return {
