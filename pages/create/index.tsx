@@ -9,12 +9,23 @@ import CharacterInput from "../../components/content/CharacterInput";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { requester } from "../../lib/requster";
+import { useToast } from "../../context/toast.context";
 
 const Create: NextPage = () => {
 	const route = useRouter();
+	const { makeToast } = useToast();
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
+		makeToast(
+			"notification",
+			{
+				title: "잠시만요!",
+				message:
+					"유저님이 사용할 기부공을 만들고 있어요!\n잠시만 기다려주세요 🥺",
+			},
+			1500,
+		);
 		Cookies.set(
 			"accessToken",
 			(await requester.post("/api/session")).data.token,
