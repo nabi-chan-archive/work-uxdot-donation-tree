@@ -114,14 +114,20 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 						</dd>
 					</SpaceBetween>
 
-					{info.map((info) => (
-						<SpaceBetween key={info.id} background={"white"} text={"black"}>
-							<dt>{info.name} 님</dt>
-							<dd>
-								<Text color={"treeGrey"}>{info.phone}</Text>
-							</dd>
-						</SpaceBetween>
-					))}
+					<div
+						style={{
+							maxHeight: "calc(100vh - 41px - 39px)",
+							overflowY: "auto",
+						}}>
+						{info.map((info) => (
+							<SpaceBetween key={info.id} background={"white"} text={"black"}>
+								<dt>{info.name} 님</dt>
+								<dd>
+									<Text color={"treeGrey"}>{info.phone}</Text>
+								</dd>
+							</SpaceBetween>
+						))}
+					</div>
 				</Background>
 			</div>
 
