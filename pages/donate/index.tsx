@@ -10,10 +10,9 @@ import Text from "../../components/Text";
 import Absolute from "../../components/Absolute";
 import Flex from "../../components/Flex";
 import Image from "next/image";
-import Tree from "../../components/content/Tree";
-import { useState } from "react";
+import Tree, { Ball } from "../../components/content/Tree";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getBallsMockup, getDummyBallsMockup } from "../../constant/dummy";
 import axios from "axios";
 
 const PageButton = styled.button<{
@@ -46,8 +45,8 @@ interface Props {
 		_count: number;
 	};
 	tree: {
-		big: {}[];
-		small: {}[];
+		big: Ball[];
+		small: Ball[];
 	};
 	info: {
 		id: number;
@@ -57,9 +56,24 @@ interface Props {
 }
 
 const Donate: NextPage<Props> = ({ meta, tree, info }) => {
-	console.log(meta, tree, info);
-	const maxPage = 20;
+	const maxPage = Math.ceil(meta._count / 9);
+	const [treeData, setTreeData] = useState<Props["tree"]>(tree);
 	const [page, setPage] = useState(0);
+
+	async function onChangePage(target: "next" | "prev") {
+		if (target === "next") setPage((prev) => prev + 1);
+		if (target === "prev") setPage((prev) => prev - 1);
+
+		setTreeData(
+			(
+				await axios.get("http://localhost:3000/api/donation/tree", {
+					params: {
+						page: page + (target === "next" ? 1 : -1),
+					},
+				})
+			).data,
+		);
+	}
 
 	return (
 		<Grid>
@@ -115,12 +129,11 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 				<div
 					style={{
 						display: "grid",
-						gridTemplateRows: "1fr 40px",
 						position: "relative",
 						height: "100%",
 					}}>
 					{page > 0 ? (
-						<PageButton left={85} onClick={() => setPage((prev) => prev - 1)}>
+						<PageButton left={85} onClick={() => onChangePage("prev")}>
 							<svg
 								width="13"
 								height="23"
@@ -152,14 +165,14 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 								return index === page ? (
 									<Tree
 										key={index}
-										dummy={getDummyBallsMockup()}
-										balls={getBallsMockup()}
+										dummy={treeData.small}
+										balls={treeData.big}
 									/>
 								) : null;
 							})}
 					</AlignCenter>
 					{page < maxPage - 1 ? (
-						<PageButton right={85} onClick={() => setPage((prev) => prev + 1)}>
+						<PageButton right={85} onClick={() => onChangePage("next")}>
 							<svg
 								width="13"
 								height="23"
