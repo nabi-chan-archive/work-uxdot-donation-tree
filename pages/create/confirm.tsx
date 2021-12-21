@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import DonateBall from "../../components/DonateBall";
 import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
+import { requester } from "../../lib/requster";
 
 interface Props {
 	userInfo: {
@@ -26,6 +27,7 @@ const Confirm: NextPage<Props> = ({ userInfo }) => {
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
+		await requester.post("/api/donation");
 		await route.push("/create/complete", "/create");
 	}
 
