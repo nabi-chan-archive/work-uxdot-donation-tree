@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import { requester } from "../../lib/requster";
+import Link from "next/link";
 
 const PageButton = styled.button<{
 	left?: number;
@@ -98,9 +99,11 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 								target={1000000}
 							/>
 							<Space h={35} />
-							<Button background={"white"} color={"treeRed"}>
-								기부하러 가기
-							</Button>
+							<Link href={"/"} passHref>
+								<Button background={"white"} color={"treeRed"}>
+									기부하러 가기
+								</Button>
+							</Link>
 						</div>
 					</AlignCenter>
 				</Background>
