@@ -10,8 +10,7 @@ import Input from "../../components/Input";
 import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
 import { FormElement } from "../../type";
-import axios from "axios";
-
+import { requester } from "../../lib/requster";
 interface Props {
 	userInfo: {
 		name: string;
@@ -28,7 +27,7 @@ const Phone: NextPage<Props> = ({ userInfo }) => {
 
 	async function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
-		await axios.put("/api/session", {
+		await requester.put("/api/session", {
 			phone: event.currentTarget.elements.phone.value,
 		});
 		await route.push("/create/confirm", "/create");

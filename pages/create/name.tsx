@@ -9,8 +9,8 @@ import CharacterInput from "../../components/content/CharacterInput";
 import { useRouter } from "next/router";
 import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
-import axios from "axios";
 import { FormElement } from "../../type";
+import { requester } from "../../lib/requster";
 
 interface Props {
 	userInfo: {
@@ -23,7 +23,7 @@ const Name: NextPage<Props> = ({ userInfo }) => {
 	const route = useRouter();
 	async function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
-		await axios.put("/api/session", {
+		await requester.put("/api/session", {
 			name: event.currentTarget.elements.name.value,
 		});
 		await route.push("/create/phone", "/create");

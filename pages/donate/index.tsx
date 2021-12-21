@@ -13,8 +13,8 @@ import Image from "next/image";
 import Tree, { Ball } from "../../components/content/Tree";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { AnimatePresence } from "framer-motion";
+import { requester } from "../../lib/requster";
 
 const PageButton = styled.button<{
 	left?: number;
@@ -66,7 +66,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 		setVisible(false);
 		setTreeData(
 			(
-				await axios.get("http://localhost:3000/api/donation/tree", {
+				await requester.get("/api/donation/tree", {
 					params: {
 						page: page + (target === "next" ? 1 : -1),
 					},
@@ -230,11 +230,9 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const meta = (await axios.get("http://localhost:3000/api/donation/metadata"))
-		.data;
-	const tree = (await axios.get("http://localhost:3000/api/donation/tree"))
-		.data;
-	const info = (await axios.get("http://localhost:3000/api/donation")).data;
+	const meta = (await requester.get("/api/donation/metadata")).data;
+	const tree = (await requester.get("/api/donation/tree")).data;
+	const info = (await requester.get("/api/donation")).data;
 
 	return {
 		props: {
