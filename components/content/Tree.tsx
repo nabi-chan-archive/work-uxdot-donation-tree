@@ -16,7 +16,7 @@ const AbsoluteDonateBall = styled(DonateBall)<{
 	left: ${({ left }) => `${left}px`};
 `;
 
-type Ball = React.ComponentProps<typeof DonateBall> & {
+export type Ball = React.ComponentProps<typeof DonateBall> & {
 	id: string;
 	top: number;
 	left: number;
