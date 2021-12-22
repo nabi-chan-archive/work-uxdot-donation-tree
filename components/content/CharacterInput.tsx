@@ -19,7 +19,12 @@ const CharacterInput: React.FC<Props> = ({
 	return (
 		<CharacterInputContainer>
 			{children}
-			<Absolute right={38} bottom={characterPositionY}>
+			<Absolute
+				right={38}
+				bottom={characterPositionY}
+				style={{
+					pointerEvents: "none",
+				}}>
 				<Image src={characterUrl} alt={""} width={180} height={410} />
 			</Absolute>
 		</CharacterInputContainer>
