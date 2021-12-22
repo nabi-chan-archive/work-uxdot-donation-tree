@@ -66,6 +66,10 @@ const Create: NextPage = () => {
 		Cookies.set(
 			"accessToken",
 			(await requester.post("/api/session")).data.token,
+			{
+				sameSite: "none",
+				secure: true,
+			},
 		);
 		await route.push("/create/name", "/create");
 	}
