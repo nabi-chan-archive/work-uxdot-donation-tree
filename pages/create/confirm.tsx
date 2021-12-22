@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import DonateBall from "../../components/content/DonateBall";
 import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
+import Image from "next/image";
+import Content from "../../components/Content";
 import { requester } from "../../lib/requster";
 
 interface Props {
@@ -58,21 +60,35 @@ const Confirm: NextPage<Props> = ({ userInfo }) => {
 						]}
 					/>
 				</Background>
-				<Background background={"treeGreenBright"} textColor={"white"}>
+				<Background
+					background={"treeGreenBright"}
+					textColor={"white"}
+					style={{
+						position: "relative",
+					}}>
+					<Image
+						layout={"fill"}
+						src={"/confirm.png"}
+						alt={""}
+						objectFit={"cover"}
+						objectPosition={"center"}
+					/>
 					<AlignCenter
 						style={{
 							justifyContent: "center",
 						}}>
-						<DonateBall
-							ballBackground={"white"}
-							ballText={"treeGreen"}
-							ballSize={"preview"}
-							name={userInfo.name}
-							phone={`${userInfo.phone.slice(0, 1)}**${userInfo.phone.slice(
-								3,
-								4,
-							)}`}
-						/>
+						<Content level={"content"}>
+							<DonateBall
+								ballBackground={"white"}
+								ballText={"treeGreen"}
+								ballSize={"preview"}
+								name={userInfo.name}
+								phone={`${userInfo.phone.slice(0, 1)}**${userInfo.phone.slice(
+									3,
+									4,
+								)}`}
+							/>
+						</Content>
 					</AlignCenter>
 				</Background>
 			</Grid>
