@@ -25,29 +25,29 @@ const Create: NextPage = () => {
 
 		if (secureKeyword1.value !== "웰컴") {
 			makeToast("error", {
-				title: "1번째 보안코드가 다릅니다!",
-				message: "",
+				title: "1번째 보안키워드가 다릅니다!",
+				message: "힌트 : 할아버지를 도와주면 알 수 있을지도 몰라요!",
 			});
 			errored = true;
 		}
 		if (secureKeyword2.value !== "함께") {
 			makeToast("error", {
-				title: "2번째 보안코드가 다릅니다!",
-				message: "",
+				title: "2번째 보안키워드가 다릅니다!",
+				message: "힌트 : 아리를 도와주면 알 수 있을지도 몰라요!",
 			});
 			errored = true;
 		}
 		if (secureKeyword3.value !== "행복") {
 			makeToast("error", {
-				title: "3번째 보안코드가 다릅니다!",
-				message: "",
+				title: "3번째 보안키워드가 다릅니다!",
+				message: "힌트 : 모모를 도와주면 알 수 있을지도 몰라요!",
 			});
 			errored = true;
 		}
 		if (secureKeyword4.value !== "기부트리") {
 			makeToast("error", {
-				title: "4번째 보안코드가 다릅니다!",
-				message: "",
+				title: "4번째 보안키워드가 다릅니다!",
+				message: "힌트 : 마을 곳곳에 떨어진 쓰레기들을 주워보는건 어떨까요?",
 			});
 			errored = true;
 		}
