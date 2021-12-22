@@ -47,7 +47,7 @@ const Create: NextPage = () => {
 		if (secureKeyword4.value !== "기부트리") {
 			makeToast("error", {
 				title: "4번째 보안키워드가 다릅니다!",
-				message: "힌트 : 마을 곳곳에 떨어진 쓰레기들을 주워보는건 어떨까요?",
+				message: "힌트 : 마을 곳곳에 떨어진 선물들을 주워보는건 어떨까요?",
 			});
 			errored = true;
 		}
