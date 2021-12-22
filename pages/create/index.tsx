@@ -55,15 +55,11 @@ const Create: NextPage = () => {
 
 		if (errored) return;
 
-		makeToast(
-			"notification",
-			{
-				title: "잠시만요!",
-				message:
-					"유저님이 사용할 기부공을 만들고 있어요!\n잠시만 기다려주세요 🥺",
-			},
-			1500,
-		);
+		makeToast("notification", {
+			title: "잠시만요!",
+			message:
+				"유저님이 사용할 기부공을 만들고 있어요!\n잠시만 기다려주세요 🥺",
+		});
 		Cookies.set(
 			"accessToken",
 			(await requester.post("/api/session")).data.token,
