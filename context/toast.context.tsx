@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Toast from "../components/Toast";
 
 export interface IToast {
-	id: number;
+	id: string;
 	type: "error" | "warning" | "success" | "notification";
 	content: {
 		title: string;
@@ -39,7 +39,7 @@ const ToastContext = createContext<ToastContext>({
 const ToastContextProvider: React.FC = ({ children }) => {
 	const [notifications, setNotifications] = useState<IToast[]>([]);
 
-	function removeToast(id: number) {
+	function removeToast(id: string) {
 		setNotifications((notifications) =>
 			notifications.filter((notification) => notification.id !== id),
 		);
@@ -51,7 +51,7 @@ const ToastContextProvider: React.FC = ({ children }) => {
 		duration?: number,
 	) {
 		const toast: IToast = {
-			id: Date.now(),
+			id: Date.now() + content.title,
 			type,
 			content,
 			duration,

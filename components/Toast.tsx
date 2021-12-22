@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 interface Props {
 	toast: IToast;
-	onRemove: (id: number) => void;
+	onRemove: (id: string) => void;
 }
 
 const ToastContainer = styled(motion.div)`
