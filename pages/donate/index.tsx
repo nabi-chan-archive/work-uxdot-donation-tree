@@ -56,7 +56,7 @@ interface Props {
 }
 
 const Donate: NextPage<Props> = ({ meta, tree, info }) => {
-	const maxPage = Math.floor(meta._count / 9);
+	const maxPage = Math.floor(meta._count / 9) || 1;
 	const [treeData, setTreeData] = useState<Props["tree"]>(tree);
 	const [page, setPage] = useState(0);
 	const [visible, setVisible] = useState(true);
