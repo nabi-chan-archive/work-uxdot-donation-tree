@@ -11,6 +11,7 @@ import SessionModel from "../../model/SessionModel";
 import jsonwebtoken from "jsonwebtoken";
 import { FormElement } from "../../type";
 import { requester } from "../../lib/requster";
+import Input from "../../components/Input";
 
 interface Props {
 	userInfo: {
@@ -53,16 +54,18 @@ const Name: NextPage<Props> = ({ userInfo }) => {
 							justifyContent: "center",
 						}}>
 						<CharacterInput
-							type="text"
-							maxLength={8}
-							required
-							placeholder={"이름을 입력해주세요 (8자 이내)"}
-							name={"name"}
 							characterUrl={"/name_character.png"}
-							key={"name"}
-							defaultValue={userInfo.name}
-							characterPositionY={-277}
-						/>
+							characterPositionY={-277}>
+							<Input
+								type="text"
+								maxLength={8}
+								required
+								placeholder={"이름을 입력해주세요 (8자 이내)"}
+								name={"name"}
+								key={"name"}
+								defaultValue={userInfo.name}
+							/>
+						</CharacterInput>
 					</AlignCenter>
 				</Background>
 			</Grid>
