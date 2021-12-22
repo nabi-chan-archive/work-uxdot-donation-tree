@@ -12,6 +12,7 @@ import { requester } from "../../lib/requster";
 import { useToast } from "../../context/toast.context";
 import SplitInput from "../../components/content/SplitInput";
 import { FormElement } from "../../type";
+import Absolute from "../../components/Absolute";
 
 const Create: NextPage = () => {
 	const route = useRouter();
@@ -100,6 +101,21 @@ const Create: NextPage = () => {
 						<CharacterInput
 							characterUrl={"/keyword_character.png"}
 							characterPositionY={-260}>
+							<Absolute
+								top={-150}
+								left={"50%"}
+								style={{
+									transform: "translateX(-50%)",
+									whiteSpace: "nowrap",
+								}}>
+								<h1
+									style={{
+										fontSize: 24,
+										fontWeight: "bold",
+									}}>
+									힌트 : [OO] 2022년 [OO]해요 [OO]한 [OOOO]
+								</h1>
+							</Absolute>
 							<SplitInput />
 						</CharacterInput>
 					</AlignCenter>
