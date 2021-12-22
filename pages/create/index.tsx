@@ -5,18 +5,55 @@ import AlignCenter from "../../components/AlignCenter";
 import Sections from "../../components/content/Sections";
 import Button from "../../components/Button";
 import Form from "../../components/Form";
-import CharacterInput from "../../components/content/CharacterInput";
+// import CharacterInput from "../../components/content/CharacterInput";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { requester } from "../../lib/requster";
 import { useToast } from "../../context/toast.context";
+import SplitInput from "../../components/content/SplitInput";
+import { FormElement } from "../../type";
 
 const Create: NextPage = () => {
 	const route = useRouter();
 	const { makeToast } = useToast();
 
-	async function handleSubmit(event: React.FormEvent) {
+	async function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
+		let errored = false;
+		const { secureKeyword1, secureKeyword2, secureKeyword3, secureKeyword4 } =
+			event.currentTarget.elements;
+
+		if (secureKeyword1.value !== "웰컴") {
+			makeToast("error", {
+				title: "1번째 보안코드가 다릅니다!",
+				message: "",
+			});
+			errored = true;
+		}
+		if (secureKeyword2.value !== "함께") {
+			makeToast("error", {
+				title: "2번째 보안코드가 다릅니다!",
+				message: "",
+			});
+			errored = true;
+		}
+		if (secureKeyword3.value !== "행복") {
+			makeToast("error", {
+				title: "3번째 보안코드가 다릅니다!",
+				message: "",
+			});
+			errored = true;
+		}
+		if (secureKeyword4.value !== "기부트리") {
+			makeToast("error", {
+				title: "4번째 보안코드가 다릅니다!",
+				message: "",
+			});
+			errored = true;
+		}
+
+		if (errored) return;
+
 		makeToast(
 			"notification",
 			{
@@ -56,16 +93,17 @@ const Create: NextPage = () => {
 						style={{
 							justifyContent: "center",
 						}}>
-						<CharacterInput
-							type="text"
-							required
-							maxLength={8}
-							placeholder={"보안키워드"}
-							name={"secure_keyword"}
-							characterUrl={"/keyword_character.png"}
-							key={"secureKeyword"}
-							characterPositionY={-225}
-						/>
+						{/*<CharacterInput*/}
+						{/*	type="text"*/}
+						{/*	required*/}
+						{/*	maxLength={8}*/}
+						{/*	placeholder={"보안키워드"}*/}
+						{/*	name={"secure_keyword"}*/}
+						{/*	characterUrl={"/keyword_character.png"}*/}
+						{/*	key={"secureKeyword"}*/}
+						{/*	characterPositionY={-225}*/}
+						{/*/>*/}
+						<SplitInput />
 					</AlignCenter>
 				</Background>
 			</Grid>
