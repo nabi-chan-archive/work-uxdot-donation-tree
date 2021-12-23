@@ -58,7 +58,8 @@ const Create: NextPage = () => {
 		makeToast("notification", {
 			title: "잠시만요!",
 			message:
-				"유저님이 사용할 기부공을 만들고 있어요!\n잠시만 기다려주세요 🥺",
+				"유저님이 사용할 기부공을 만들고 있어요!\n잠시만 기다려주세요 🥺\n" +
+				"만약 다음페이지로 넘어가지지 않는다면...\n버튼을 한번만 더 눌려주세요!",
 		});
 		Cookies.set(
 			"accessToken",
