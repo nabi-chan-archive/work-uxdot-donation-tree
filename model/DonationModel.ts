@@ -38,7 +38,7 @@ class DonationModel extends PrismaModel {
 			(
 				await this.client.donation.findMany({
 					orderBy: {
-						createdAt: "desc",
+						createdAt: "asc",
 					},
 					select: {
 						id: true,
