@@ -56,7 +56,7 @@ interface Props {
 }
 
 const Donate: NextPage<Props> = ({ meta, tree, info }) => {
-	const maxPage = Math.floor(meta._count / 9) || 1;
+	const maxPage = Math.floor(meta._count / 9);
 	const [treeData, setTreeData] = useState<Props["tree"]>(tree);
 	const [page, setPage] = useState(0);
 	const [visible, setVisible] = useState(true);
@@ -171,7 +171,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 					) : null}
 					<AlignCenter justify>
 						<AnimatePresence onExitComplete={() => setVisible(true)}>
-							{Array(maxPage)
+							{Array(maxPage + 1)
 								.fill("")
 								.map((_, index) => {
 									return index === page && visible ? (
@@ -180,7 +180,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 								})}
 						</AnimatePresence>
 					</AlignCenter>
-					{page < maxPage - 1 ? (
+					{page < maxPage ? (
 						<PageButton right={85} onClick={() => onChangePage("next")}>
 							<svg
 								width="13"
