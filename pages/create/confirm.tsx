@@ -12,6 +12,7 @@ import jsonwebtoken from "jsonwebtoken";
 import Image from "next/image";
 import Content from "../../components/Content";
 import { requester } from "../../lib/requster";
+import { useToast } from "../../context/toast.context";
 
 interface Props {
 	userInfo: {
@@ -22,6 +23,7 @@ interface Props {
 
 const Confirm: NextPage<Props> = ({ userInfo }) => {
 	const route = useRouter();
+	const { makeToast } = useToast();
 
 	async function back() {
 		await route.push("/create/name", "/create");
@@ -29,6 +31,12 @@ const Confirm: NextPage<Props> = ({ userInfo }) => {
 
 	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
+		makeToast("notification", {
+			title: "잠시만요!",
+			message:
+				"기부공을 트리에 달고 있어요!\n 조금만 기다려주세요 🙏" +
+				"만약 다음페이지로 넘어가지지 않는다면...\n버튼을 한번만 더 눌려주세요!",
+		});
 		await requester.post("/api/donation");
 		await route.push("/create/complete", "/create");
 	}
