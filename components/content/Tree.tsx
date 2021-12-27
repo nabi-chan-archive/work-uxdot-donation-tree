@@ -19,7 +19,7 @@ const AnimatedAbsoluteDonateBall = styled(motion.div)<{
 `;
 
 export type Ball = React.ComponentProps<typeof DonateBall> & {
-	id: string;
+	id: string | number;
 	top: number;
 	left: number;
 };
