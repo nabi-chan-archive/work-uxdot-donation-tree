@@ -2,6 +2,7 @@ import { getRandColor } from "../lib/getRandColor";
 import PrismaModel from "./PrismaModel";
 import { ThemeColor } from "../styles/Theme";
 import { ballPosition, dummyBallPosition } from "../constant/balls";
+import { Ball } from "../components/content/Tree";
 
 class DonationModel extends PrismaModel {
 	constructor() {
@@ -95,7 +96,7 @@ class DonationModel extends PrismaModel {
 	 *
 	 * @param length - 가져올 아이템의 총 개수입니다.
 	 */
-	async getSmallBalls(length = 9) {
+	getSmallBalls(length = 9): Ball[] {
 		return (
 			new Array(length * 2)
 				.fill("")
@@ -117,7 +118,7 @@ class DonationModel extends PrismaModel {
 						ballText: text as ThemeColor,
 						ballBackground: background as ThemeColor,
 					};
-				})
+				}) as Ball[]
 		);
 	}
 

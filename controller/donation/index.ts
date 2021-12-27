@@ -32,7 +32,7 @@ class DonationController {
 	 */
 	async tree(req: Request, res: Response) {
 		const big = await this.model.list(9, Number(req.query.page || 0));
-		const small = await this.model.getSmallBalls(big.length);
+		const small = this.model.getSmallBalls(big.length);
 
 		return res
 			.status(200)
