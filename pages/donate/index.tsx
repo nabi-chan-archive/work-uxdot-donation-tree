@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import { requester } from "../../lib/requster";
 import Link from "next/link";
+import DonationModel from "../../model/DonationModel";
 
 const PageButton = styled.button<{
 	left?: number;
@@ -234,16 +235,13 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const meta = (await requester.get("/api/donation/metadata")).data;
-	const lastPage = Math.floor(meta._count / 9);
-	const tree = (
-		await requester.get("/api/donation/tree", {
-			params: {
-				page: lastPage,
-			},
-		})
-	).data;
-	const info = (await requester.get("/api/donation")).data;
+	const model = new DonationModel();
+	const meta = await model.metadata();
+	const info = await model.list(20, 0);
+	const tree = [
+		...info.slice(0, 9),
+		...model.getSmallBalls(Math.floor(meta._count / 9)),
+	].sort((p, c) => (p.top > c.top ? 1 : -1));
 
 	return {
 		props: {
