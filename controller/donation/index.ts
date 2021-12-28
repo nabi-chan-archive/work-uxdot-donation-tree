@@ -40,12 +40,12 @@ class DonationController {
 	}
 
 	/**
-	 * 지금까지 진행된 기부 목록을 기부 목록에 맞게 20개씩 끊어서 가져옵니다.
+	 * 지금까지 진행된 기부 목록을 기부 목록에 맞게 100개씩 끊어서 가져옵니다.
 	 */
 	async list(req: Request, res: Response) {
 		return res
 			.status(200)
-			.json(await this.model.list(20, Number(req.query.page || 0)));
+			.json(await this.model.list(100, Number(req.query.page || 0)));
 	}
 
 	/**
