@@ -237,17 +237,17 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 export const getServerSideProps: GetServerSideProps = async () => {
 	const model = new DonationModel();
 	const meta = await model.metadata();
-	const info = await model.list(100, 0);
+	const info = await model.list(100, 0, "desc");
 	const tree = [
-		...info.slice(0, 9),
-		...model.getSmallBalls(Math.floor(meta._count / 9)),
+		...info.slice(0, 9 - Math.ceil(meta._count % 9) + 1),
+		...model.getSmallBalls(9 - Math.ceil(meta._count % 9) + 1),
 	].sort((p, c) => (p.top > c.top ? 1 : -1));
 
 	return {
 		props: {
 			meta,
 			tree,
-			info: info.reverse(),
+			info,
 		},
 	};
 };
