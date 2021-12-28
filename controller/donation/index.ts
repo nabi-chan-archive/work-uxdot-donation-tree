@@ -45,7 +45,7 @@ class DonationController {
 	async list(req: Request, res: Response) {
 		return res
 			.status(200)
-			.json(await this.model.list(100, Number(req.query.page || 0)));
+			.json(await this.model.list(100, Number(req.query.page || 0), "desc"));
 	}
 
 	/**

@@ -31,15 +31,16 @@ class DonationModel extends PrismaModel {
 	 *
 	 * @param take - 페이지당 가져올 아이템의 개수를 표시합니다.
 	 * @param page - 목록에서 가져올 페이지입니다.
+	 * @param order - 목록을 읽어오는 순서를 정합니다.
 	 */
-	async list(take: number, page: number) {
+	async list(take: number, page: number, order: "asc" | "desc" = "asc") {
 		const skip = take * page;
 
 		return (
 			(
 				await this.client.donation.findMany({
 					orderBy: {
-						createdAt: "asc",
+						createdAt: order,
 					},
 					select: {
 						id: true,
