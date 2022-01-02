@@ -239,8 +239,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const meta = await model.metadata();
 	const info = await model.list(100, 0, "desc");
 	const tree = [
-		...info.slice(0, 9 - Math.ceil(meta._count % 9) + 1),
-		...model.getSmallBalls(9 - Math.ceil(meta._count % 9) + 1),
+		...info.slice(0, 9 - Math.floor(meta._count % 9) + 1),
+		...model.getSmallBalls(9 - Math.floor(meta._count % 9) + 1),
 	].sort((p, c) => (p.top > c.top ? 1 : -1));
 
 	return {
