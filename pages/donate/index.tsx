@@ -212,7 +212,7 @@ const Donate: NextPage<Props> = ({ meta, tree, info }) => {
 					<Background background={"treeLightGrey"} textColor={"black"}>
 						<AlignCenter justify>
 							<Text size={10} weight={600}>
-								{page + 1} / {maxPage}
+								{page + 1} / {maxPage + 1}
 							</Text>
 						</AlignCenter>
 					</Background>
