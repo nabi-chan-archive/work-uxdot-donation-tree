@@ -11,11 +11,12 @@ class SessionModel extends PrismaModel {
 	 * @return {string} 생성된 세션 UUID
 	 */
 	async create(): Promise<string> {
-		return (
-			await this.client.session.create({
-				data: {},
-			})
-		).uuid;
+		// return (
+		// 	await this.client.session.create({
+		// 		data: {},
+		// 	})
+		// ).uuid;
+		return "this-is-test-uuid";
 	}
 
 	/**
@@ -28,19 +29,23 @@ class SessionModel extends PrismaModel {
 		phone: string | null;
 		name: string | null;
 	} | null> {
-		return await this.client.session.findUnique({
-			where: {
-				uuid: uuid,
-			},
-			select: {
-				createdAt: false,
-				donation: false,
-				id: true,
-				uuid: true,
-				name: true,
-				phone: true,
-			},
-		});
+		// return await this.client.session.findUnique({
+		// 	where: {
+		// 		uuid: uuid,
+		// 	},
+		// 	select: {
+		// 		createdAt: false,
+		// 		donation: false,
+		// 		id: true,
+		// 		uuid: true,
+		// 		name: true,
+		// 		phone: true,
+		// 	},
+		// });
+		return {
+			name: "홍길동",
+			phone: "1234",
+		};
 	}
 
 	/**
@@ -58,12 +63,13 @@ class SessionModel extends PrismaModel {
 			name?: string;
 		},
 	): Promise<void> {
-		await this.client.session.update({
-			where: {
-				uuid: uuid,
-			},
-			data,
-		});
+		// await this.client.session.update({
+		// 	where: {
+		// 		uuid: uuid,
+		// 	},
+		// 	data,
+		// });
+		return;
 	}
 }
 

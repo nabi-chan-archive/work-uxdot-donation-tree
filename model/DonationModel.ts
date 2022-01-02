@@ -3,6 +3,7 @@ import PrismaModel from "./PrismaModel";
 import { ThemeColor } from "../styles/Theme";
 import { ballPosition, dummyBallPosition } from "../constant/balls";
 import { Ball } from "../components/content/Tree";
+import { user } from "../constant/archive";
 
 class DonationModel extends PrismaModel {
 	constructor() {
@@ -15,15 +16,18 @@ class DonationModel extends PrismaModel {
 	 * @param uuid - uuid
 	 */
 	async create(uuid: string) {
-		await this.client.donation.create({
-			data: {
-				session: {
-					connect: {
-						uuid,
-					},
-				},
-			},
-		});
+		// await this.client.donation.create({
+		// 	data: {
+		// 		session: {
+		// 			connect: {
+		// 				uuid,
+		// 			},
+		// 		},
+		// 	},
+		// });
+		return {
+			uuid: "this-is-dummy-uuid",
+		};
 	}
 
 	/**
@@ -37,27 +41,29 @@ class DonationModel extends PrismaModel {
 		const skip = take * page;
 
 		return (
-			(
-				await this.client.donation.findMany({
-					orderBy: {
-						createdAt: order,
-					},
-					select: {
-						id: true,
-						sessionId: false,
-						createdAt: false,
-						session: {
-							select: {
-								id: false,
-								name: true,
-								phone: true,
-							},
-						},
-					},
-					skip,
-					take,
-				})
-			)
+			// (
+			// 	await this.client.donation.findMany({
+			// 		orderBy: {
+			// 			createdAt: order,
+			// 		},
+			// 		select: {
+			// 			id: true,
+			// 			sessionId: false,
+			// 			createdAt: false,
+			// 			session: {
+			// 				select: {
+			// 					id: false,
+			// 					name: true,
+			// 					phone: true,
+			// 				},
+			// 			},
+			// 		},
+			// 		skip,
+			// 		take,
+			// 	})
+			// )
+			user
+				.slice(skip, skip + take)
 				// make object flat
 				.map(({ id, session }) => ({
 					id,
@@ -127,9 +133,12 @@ class DonationModel extends PrismaModel {
 	 * 기부와 관련된 메타데이터를 가져옵니다.
 	 */
 	async metadata() {
-		return await this.client.donation.aggregate({
-			_count: true,
-		});
+		// return await this.client.donation.aggregate({
+		// 	_count: true,
+		// });
+		return {
+			_count: user.length,
+		};
 	}
 }
 

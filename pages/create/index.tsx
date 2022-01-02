@@ -13,10 +13,25 @@ import { useToast } from "../../context/toast.context";
 import SplitInput from "../../components/content/SplitInput";
 import { FormElement } from "../../type";
 import Absolute from "../../components/Absolute";
+import { useEffect } from "react";
 
 const Create: NextPage = () => {
 	const route = useRouter();
 	const { makeToast } = useToast();
+
+	useEffect(() => {
+		makeToast(
+			"error",
+			{
+				title: "확인해주세요!",
+				message:
+					"해당 프로젝트는 2021년 12월 31일부로 종료되었어요!\n" +
+					"기부트리에 기부를 해도 데이터베이스에 등록되지 않는점 참고해주세요 🙇‍♀️",
+			},
+			50000,
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	async function handleSubmit(event: React.FormEvent<FormElement>) {
 		event.preventDefault();
@@ -110,7 +125,7 @@ const Create: NextPage = () => {
 										fontSize: 24,
 										fontWeight: "bold",
 									}}>
-									힌트 : [OO] 2022년 [OO]해요 [OO]한 [OOOO]
+									힌트 : [웰컴] 2022년 [함께]해요 [행복]한 [기부트리]
 								</h1>
 							</Absolute>
 							<SplitInput />

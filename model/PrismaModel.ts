@@ -1,10 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 
 class PrismaModel {
-	client: PrismaClient;
+	// client: PrismaClient;
 
 	constructor() {
-		this.client = new PrismaClient();
+		// this.client = new PrismaClient();
 	}
 }
 
